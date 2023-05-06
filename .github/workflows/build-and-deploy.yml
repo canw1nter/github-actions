@@ -2,8 +2,8 @@ name: build-and-deploy
 
 on:
   push:
-    tags:
-      - qa-v**
+    branches:
+      - qa
       
 jobs:
   all:
