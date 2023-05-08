@@ -3,7 +3,7 @@ name: test
 on:
   push:
     tags:
-      - 'qa-v*.*.*'
+      - 'qa*.*.*'
 jobs:
   test:
     runs-on: ubuntu-latest
