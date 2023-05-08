@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create connect private key
-        run: echo ${{secrets.CONNECT_SERVER_PRIVATE_KEY}} >> ~/.ssh/private_key
+        run: echo "${{secrets.CONNECT_SERVER_PRIVATE_KEY}}" >> ~/.ssh/private_key
       - name: Connect to deploy server
         run: ssh ${{secrets.TEST_SERVER_USERNAME}}@${{secrets.TEST_SERVER_IP}} -p ${{secrets.TEST_SERVER_PORT}} -o StrictHostKeyChecking=no -i ~/.ssh/private_key
       - name: ls
