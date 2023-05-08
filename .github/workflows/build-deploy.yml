@@ -1,0 +1,30 @@
+name: build-and-deploy
+
+on: 
+  push:
+    tags:
+      - 'qa-v*.*.*'
+
+      
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull code
+        uses: actions/checkout@v2
+      - name: Build
+        run: docker build -t registry.cn-beijing.aliyuncs.com/yoooxin/test:${{github.ref_name}} .
+      - name: Login to ACR
+        run: docker login --username=${{secrets.TEST_ACR_USERNAME}} --password=${{secrets.TEST_ACR_PASSWORD}} registry.cn-beijing.aliyuncs.com
+      - name: Push to ACR
+        run: docker push registry.cn-beijing.aliyuncs.com/yoooxin/test:${{github.ref_name}}
+  Deploy:
+    needs: [Build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create connect private key
+        run: echo ${{secrets.CONNECT_SERVER_PRIVATE_KEY}} >> ~/.ssh/private_key
+      - name: Connect to deploy server
+        run: ssh ${{secrets.TEST_SERVER_USERNAME}}@${{secrets.TEST_SERVER_IP}} -p ${{secrets.TEST_SERVER_PORT}} -o StrictHostKeyChecking=no -i ~/.ssh/private_key
+      - name: ls
+        run: ls
