@@ -29,4 +29,4 @@ jobs:
       - name: Connect to deploy server
         run: ssh ${{secrets.TEST_SERVER_USERNAME}}@${{secrets.TEST_SERVER_IP}} -p ${{secrets.TEST_SERVER_PORT}} -o StrictHostKeyChecking=no -i ~/private_key
       - name: ls
-        run: ls
+        run: ls | cat
