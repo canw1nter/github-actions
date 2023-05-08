@@ -24,9 +24,5 @@ jobs:
     steps:
       - name: Create connect private key
         run: echo -e "${{secrets.CONNECT_SERVER_PRIVATE_KEY}}" > ~/private_key & chmod 400 ~/private_key
-      - name: test
-        run: cat ~/private_key  
       - name: Connect to deploy server
         run: ssh ${{secrets.TEST_SERVER_USERNAME}}@${{secrets.TEST_SERVER_IP}} -p ${{secrets.TEST_SERVER_PORT}} -o StrictHostKeyChecking=no -i ~/private_key
-      - name: ls
-        run: ls | cat
