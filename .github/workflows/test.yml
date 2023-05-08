@@ -10,4 +10,4 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Set env
-        run: echo ${{github.ref}}
+        run: echo ${{github.ref}} ${{github.ref_name}} ${{github.action_ref}} ${{github.base_ref}}
