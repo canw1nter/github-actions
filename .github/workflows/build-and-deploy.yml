@@ -11,7 +11,7 @@ jobs:
       - name: Build
         run: docker build -t registry.cn-beijing.aliyuncs.com/yoooxin/test:test1 .
       - name: Login In Aliyun
-        run: docker login --username=${{secret.TEST_ACR_USERNAME}} --password=${{secret.TEST_ACR_PASSWORD}} registry.cn-beijing.aliyuncs.com
+        run: docker login --username=${{secrets.TEST_ACR_USERNAME}} --password=${{secrets.TEST_ACR_PASSWORD}} registry.cn-beijing.aliyuncs.com
       - name: Push To Aliyun
         run: docker push registry.cn-beijing.aliyuncs.com/yoooxin/test:test1
       
