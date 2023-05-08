@@ -7,19 +7,19 @@ on:
 
       
 jobs:
-  Build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Pull code
-        uses: actions/checkout@v2
-      - name: Build
-        run: docker build -t registry.cn-beijing.aliyuncs.com/yoooxin/test:${{github.ref_name}} .
-      - name: Login to ACR
-        run: docker login --username=${{secrets.TEST_ACR_USERNAME}} --password=${{secrets.TEST_ACR_PASSWORD}} registry.cn-beijing.aliyuncs.com
-      - name: Push to ACR
-        run: docker push registry.cn-beijing.aliyuncs.com/yoooxin/test:${{github.ref_name}}
+  # Build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Pull code
+  #       uses: actions/checkout@v2
+  #     - name: Build
+  #       run: docker build -t registry.cn-beijing.aliyuncs.com/yoooxin/test:${{github.ref_name}} .
+  #     - name: Login to ACR
+  #       run: docker login --username=${{secrets.TEST_ACR_USERNAME}} --password=${{secrets.TEST_ACR_PASSWORD}} registry.cn-beijing.aliyuncs.com
+  #     - name: Push to ACR
+  #       run: docker push registry.cn-beijing.aliyuncs.com/yoooxin/test:${{github.ref_name}}
   Deploy:
-    needs: [Build]
+    # needs: [Build]
     runs-on: ubuntu-latest
     steps:
       - name: Create connect private key
