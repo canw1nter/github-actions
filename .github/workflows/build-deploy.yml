@@ -22,6 +22,8 @@ jobs:
     needs: [Build]
     runs-on: ubuntu-latest
     steps:
+      - name: test
+        run: ssh  
       - name: Create connect private key
         run: echo "${{secrets.CONNECT_SERVER_PRIVATE_KEY}}" >> ~/.ssh/private_key
       - name: Connect to deploy server
